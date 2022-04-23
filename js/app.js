@@ -8,6 +8,8 @@ function generatePanelGrid(size) {
     panelContainer.appendChild(panel);
   }
 
+  panelContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
   const panels = document.querySelectorAll('.panel');
 
   panels.forEach((panel) => {
