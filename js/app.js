@@ -9,21 +9,17 @@ function generatePanelGrid(size) {
   }
 
   const panels = document.querySelectorAll('.panel');
-  // Check wether we are pressing our mouse primary button
-  panels.forEach((panel) =>
-    panel.addEventListener('mousedown', () => (mouseDown = true))
-  );
 
-  panels.forEach((panel) =>
-    panel.addEventListener('mouseup', () => (mouseDown = false))
-  );
-
-  // Draw square color if we are pressing the mouse
-  panels.forEach((panel) =>
+  panels.forEach((panel) => {
+    // Implement drawing capability
+    panel.addEventListener('mousedown', () => (mouseDown = true));
+    panel.addEventListener('mouseup', () => (mouseDown = false));
     panel.addEventListener('mousemove', function () {
       if (mouseDown) drawColor(this, 'white');
-    })
-  );
+    });
+    // Prevent dragging of panels
+    panel.addEventListener('dragstart', (e) => e.preventDefault());
+  });
 }
 
 function drawColor(panel, color) {
