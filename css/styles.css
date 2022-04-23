@@ -4,3 +4,24 @@
   box-sizing: border-box;
   font-family: 'Work Sans', sans-serif;
 }
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.panel-container {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  background-color: black;
+  margin: 10em;
+}
+
+.panel {
+  min-width: 1em;
+  min-height: 1em;
+  background-color: aqua;
+  border: 1px solid black;
+}
