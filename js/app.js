@@ -9,6 +9,7 @@ function generatePanelGrid(size) {
   }
 
   const panels = document.querySelectorAll('.panel');
+  // Check wether we are pressing our mouse primary button
   panels.forEach((panel) =>
     panel.addEventListener('mousedown', () => (mouseDown = true))
   );
@@ -17,6 +18,7 @@ function generatePanelGrid(size) {
     panel.addEventListener('mouseup', () => (mouseDown = false))
   );
 
+  // Draw square color if we are pressing the mouse
   panels.forEach((panel) =>
     panel.addEventListener('mousemove', function () {
       if (mouseDown) drawColor(this, 'white');
