@@ -24,3 +24,10 @@
   min-height: 1em;
   border: 1px solid black;
 }
+
+.toolbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

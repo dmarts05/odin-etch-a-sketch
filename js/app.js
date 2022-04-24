@@ -17,7 +17,7 @@ function generatePanelGrid(size) {
     // Implement drawing capability
     panel.addEventListener('mousedown', () => (mouseDown = true));
     panel.addEventListener('mousemove', function () {
-      if (mouseDown) drawColor(this, 'white');
+      if (mouseDown) drawColor(this, getColor());
     });
     // Prevent dragging of panels
     panel.addEventListener('dragstart', (e) => e.preventDefault());
@@ -26,6 +26,11 @@ function generatePanelGrid(size) {
 
 function drawColor(panel, color) {
   panel.setAttribute('style', `background-color: ${color}`);
+}
+
+function getColor() {
+  const colorPicker = document.querySelector('#color');
+  return colorPicker.value;
 }
 
 generatePanelGrid(16);
