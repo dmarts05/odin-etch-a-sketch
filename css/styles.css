@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 6em;
   height: 100vh;
 }
 
@@ -16,7 +17,6 @@
   display: grid;
   grid-template-columns: repeat(16, 1fr);
   background-color: black;
-  margin: 10em;
 }
 
 .panel {
@@ -29,4 +29,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1em;
+}
+
+.toolbox #color {
+  border-radius: 50%;
+  height: 6em;
+  width: 6em;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.toolbox #color::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.toolbox #color::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
 }
