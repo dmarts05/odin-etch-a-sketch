@@ -32,6 +32,27 @@ function generatePanelGrid(size) {
   });
 }
 
+function removePreviousGrid() {
+  if (document.querySelectorAll('.panel').length !== 0) {
+    let panel = panelContainer.lastElementChild;
+    while (panel) {
+      panelContainer.removeChild(panel);
+      panel = panelContainer.lastElementChild;
+    }
+  }
+}
+
+function updateGridSizeText(size) {
+  document.getElementById('grid-size-text').textContent = `${size} × ${size}`;
+}
+
+function clearGrid() {
+  const panels = document.querySelectorAll('.panel');
+  panels.forEach((panel) => {
+    panel.style.backgroundColor = defaultColor;
+  });
+}
+
 function drawColor(panel, color) {
   panel.style.backgroundColor = color;
 }
@@ -63,18 +84,6 @@ function activateEraseMode() {
   changeMode(eraseBtn);
 }
 
-function clearGrid() {
-  const panels = document.querySelectorAll('.panel');
-  panels.forEach((panel) => {
-    panel.style.backgroundColor = defaultColor;
-  });
-}
-
-function setActiveMode(btn) {
-  btn.style.backgroundColor = 'black';
-  btn.style.color = 'white';
-}
-
 function changeMode(modeBtn) {
   const formBtns = document.querySelectorAll('input[type = "button"]');
   formBtns.forEach((btn) => {
@@ -85,23 +94,16 @@ function changeMode(modeBtn) {
   setActiveMode(modeBtn);
 }
 
-function removePreviousGrid() {
-  if (document.querySelectorAll('.panel').length !== 0) {
-    let panel = panelContainer.lastElementChild;
-    while (panel) {
-      panelContainer.removeChild(panel);
-      panel = panelContainer.lastElementChild;
-    }
-  }
-}
-
-function updateGridSizeText(size) {
-  document.getElementById('grid-size-text').textContent = `${size} × ${size}`;
+function setActiveMode(btn) {
+  btn.style.backgroundColor = 'black';
+  btn.style.color = 'white';
 }
 
 function startApp() {
   generatePanelGrid(gridSizeSlider.value);
-  gridSizeSlider.addEventListener('input', (e) => updateGridSizeText(e.target.value));
+  gridSizeSlider.addEventListener('input', (e) =>
+    updateGridSizeText(e.target.value)
+  );
   gridSizeSlider.addEventListener('mouseup', (e) =>
     generatePanelGrid(e.target.value)
   );
