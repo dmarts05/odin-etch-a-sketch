@@ -1,4 +1,5 @@
 const panelContainer = document.querySelector('.panel-container');
+const formBtns = document.querySelectorAll('input[type = "button"]');
 const drawBtn = document.querySelector('#draw');
 const eraseBtn = document.querySelector('#erase');
 const clearBtn = document.querySelector('#clear');
