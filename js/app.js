@@ -1,8 +1,12 @@
 const panelContainer = document.querySelector('.panel-container');
 const drawBtn = document.querySelector('#draw');
 const eraseBtn = document.querySelector('#erase');
+const clearBtn = document.querySelector('#clear');
+
 let mouseDown = false;
-const defaultColor = window.getComputedStyle(panelContainer, null).getPropertyValue('background-color');
+const defaultColor = window
+  .getComputedStyle(panelContainer, null)
+  .getPropertyValue('background-color');
 
 function generatePanelGrid(size) {
   for (let i = 0; i < size * size; i++) {
@@ -26,7 +30,7 @@ function generatePanelGrid(size) {
 }
 
 function drawColor(panel, color) {
-  panel.setAttribute('style', `background-color: ${color}`);
+  panel.style.backgroundColor = color;
 }
 
 function getColor() {
@@ -52,6 +56,14 @@ function activateEraseMode() {
   });
 }
 
+function clearGrid() {
+  const panels = document.querySelectorAll('.panel');
+  panels.forEach((panel) => {
+    panel.style.backgroundColor = defaultColor;
+  });
+}
+
 generatePanelGrid(16);
 drawBtn.addEventListener('click', activateDrawMode);
 eraseBtn.addEventListener('click', activateEraseMode);
+clearBtn.addEventListener('click', clearGrid);
