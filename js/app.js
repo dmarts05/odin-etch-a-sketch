@@ -1,8 +1,8 @@
 const panelContainer = document.querySelector('.panel-container');
-const formBtns = document.querySelectorAll('input[type = "button"]');
 const drawBtn = document.querySelector('#draw');
 const eraseBtn = document.querySelector('#erase');
 const clearBtn = document.querySelector('#clear');
+const gridSizeSlider = document.querySelector('#grid-size');
 
 let mouseDown = false;
 const defaultColor = window
@@ -10,6 +10,8 @@ const defaultColor = window
   .getPropertyValue('background-color');
 
 function generatePanelGrid(size) {
+  removePreviousGrid();
+
   for (let i = 0; i < size * size; i++) {
     const panel = document.createElement('div');
     panel.classList.add('panel');
@@ -46,6 +48,8 @@ function activateDrawMode() {
       if (mouseDown) drawColor(this, getColor());
     });
   });
+
+  changeMode(drawBtn);
 }
 
 function activateEraseMode() {
@@ -55,6 +59,8 @@ function activateEraseMode() {
       if (mouseDown) drawColor(this, defaultColor);
     });
   });
+
+  changeMode(eraseBtn);
 }
 
 function clearGrid() {
@@ -64,7 +70,44 @@ function clearGrid() {
   });
 }
 
-generatePanelGrid(16);
-drawBtn.addEventListener('click', activateDrawMode);
-eraseBtn.addEventListener('click', activateEraseMode);
-clearBtn.addEventListener('click', clearGrid);
+function setActiveMode(btn) {
+  btn.style.backgroundColor = 'black';
+  btn.style.color = 'white';
+}
+
+function changeMode(modeBtn) {
+  const formBtns = document.querySelectorAll('input[type = "button"]');
+  formBtns.forEach((btn) => {
+    btn.style.backgroundColor = 'transparent';
+    btn.style.color = 'black';
+  });
+
+  setActiveMode(modeBtn);
+}
+
+function removePreviousGrid() {
+  if (document.querySelectorAll('.panel').length !== 0) {
+    let panel = panelContainer.lastElementChild;
+    while (panel) {
+      panelContainer.removeChild(panel);
+      panel = panelContainer.lastElementChild;
+    }
+  }
+}
+
+function updateGridSizeText(size) {
+  document.getElementById('grid-size-text').textContent = `${size} × ${size}`;
+}
+
+function startApp() {
+  generatePanelGrid(gridSizeSlider.value);
+  gridSizeSlider.addEventListener('input', (e) => updateGridSizeText(e.target.value));
+  gridSizeSlider.addEventListener('mouseup', (e) =>
+    generatePanelGrid(e.target.value)
+  );
+  drawBtn.addEventListener('click', activateDrawMode);
+  eraseBtn.addEventListener('click', activateEraseMode);
+  clearBtn.addEventListener('click', clearGrid);
+}
+
+startApp();
