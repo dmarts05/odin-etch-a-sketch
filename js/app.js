@@ -2,6 +2,7 @@ const panelContainer = document.querySelector('.panel-container');
 const drawBtn = document.querySelector('#draw');
 const eraseBtn = document.querySelector('#erase');
 const clearBtn = document.querySelector('#clear');
+const randomBtn = document.querySelector('#random');
 const gridSizeSlider = document.querySelector('#grid-size');
 
 let mouseDown = false;
@@ -62,6 +63,11 @@ function getColor() {
   return colorPicker.value;
 }
 
+function getRandomColor() {
+  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  return '#' + randomColor;
+}
+
 function activateDrawMode() {
   const panels = document.querySelectorAll('.panel');
   panels.forEach((panel) => {
@@ -82,6 +88,17 @@ function activateEraseMode() {
   });
 
   changeMode(eraseBtn);
+}
+
+function activateRandomMode() {
+  const panels = document.querySelectorAll('.panel');
+  panels.forEach((panel) => {
+    panel.addEventListener('mousemove', function () {
+      if (mouseDown) drawColor(this, getRandomColor());
+    });
+  });
+
+  changeMode(randomBtn);
 }
 
 function changeMode(modeBtn) {
@@ -108,6 +125,7 @@ function startApp() {
     generatePanelGrid(e.target.value)
   );
   drawBtn.addEventListener('click', activateDrawMode);
+  randomBtn.addEventListener('click', activateRandomMode);
   eraseBtn.addEventListener('click', activateEraseMode);
   clearBtn.addEventListener('click', clearGrid);
 }
