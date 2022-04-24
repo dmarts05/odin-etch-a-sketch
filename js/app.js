@@ -12,11 +12,11 @@ function generatePanelGrid(size) {
 
   const panels = document.querySelectorAll('.panel');
 
+  window.addEventListener('mouseup', () => (mouseDown = false));
   panels.forEach((panel) => {
     // Implement drawing capability
     panel.addEventListener('mousedown', () => (mouseDown = true));
-    panel.addEventListener('mouseup', () => (mouseDown = false));
-    panel.addEventListener('mousemove', function () {
+    panel.addEventListener('mousemove', () => {
       if (mouseDown) drawColor(this, 'white');
     });
     // Prevent dragging of panels
